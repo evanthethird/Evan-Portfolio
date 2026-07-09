@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Evan Chin - Portfolio</title>
+  <meta name="description" content="Portfolio of Evan Chin, an educator and creative technologist specialising in coding, STEM, robotics, game development, and mathematics education." />
+
+  <!-- Google Fonts: Geist -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            geist: ['Geist', 'sans-serif'],
+          },
+        },
+      },
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="font-geist bg-black text-white">
+
+  <!-- ==================== NAVBAR ==================== -->
+  <nav id="navbar" class="fixed top-0 inset-x-0 z-50 transition-all duration-300">
+    <div class="flex items-center justify-between px-6 py-5 md:px-12 lg:px-16">
+      <div class="flex items-center gap-8">
+        <a href="#hero" class="text-lg font-semibold tracking-tight text-white sm:text-xl">
+          Evan Chin<span class="text-white/60">.</span>
+        </a>
+        <div class="hidden gap-6 md:flex">
+          <a href="#work" class="nav-link text-sm text-white/80 transition-colors hover:text-white">My Projects</a>
+          <a href="#about" class="nav-link text-sm text-white/80 transition-colors hover:text-white">About Me</a>
+          <a href="#certificates" class="nav-link text-sm text-white/80 transition-colors hover:text-white">Certificates</a>
+          <a href="#curriculum" class="nav-link text-sm text-white/80 transition-colors hover:text-white">Curriculum Design</a>
+          <a href="#contact" class="nav-link text-sm text-white/80 transition-colors hover:text-white">Contact</a>
+        </div>
+      </div>
+
+      <div class="hidden md:flex items-center gap-4">
+        <a href="#contact" class="rounded-lg bg-white px-5 py-2 text-sm font-medium text-black transition-all hover:scale-105 hover:bg-white/90">
+          Let's Talk
+        </a>
+      </div>
+
+      <button id="menuToggle" class="relative z-50 flex h-10 w-10 items-center justify-center md:hidden active:scale-90" aria-label="Toggle menu">
+        <i data-lucide="menu" id="menuIcon" class="h-5 w-5 text-white transition-all duration-300"></i>
+        <i data-lucide="x" id="closeIcon" class="absolute h-5 w-5 text-white transition-all duration-300 -rotate-90 scale-0 opacity-0"></i>
+      </button>
+    </div>
+
+    <div id="mobileMenu" class="absolute inset-x-0 top-0 bg-black/98 backdrop-blur-xl transition-all duration-500 pointer-events-none h-0 opacity-0" style="transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);">
+      <div class="flex h-screen flex-col justify-center px-8">
+        <div id="menuContent" class="flex flex-col items-start gap-6 transition-all duration-500 delay-100 translate-y-8 opacity-0">
+          <a href="#work" class="menu-link text-3xl font-medium text-white/90 hover:text-white">My Projects</a>
+          <a href="#about" class="menu-link text-3xl font-medium text-white/90 hover:text-white">About Me</a>
+          <a href="#certificates" class="menu-link text-3xl font-medium text-white/90 hover:text-white">Certificates</a>
+          <a href="#curriculum" class="menu-link text-3xl font-medium text-white/90 hover:text-white">Curriculum Design</a>
+          <a href="#contact" class="menu-link text-3xl font-medium text-white/90 hover:text-white">Contact</a>
+          <a href="https://canva.link/0ehia8hhkkfrjfp" target="_blank" class="menu-link text-3xl font-medium text-white/90 hover:text-white">Resume</a>
+          <a href="#contact" class="menu-link mt-6 rounded-full bg-white px-8 py-3.5 text-base font-medium text-black hover:scale-105 inline-block">
+            Let's Talk
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ==================== HERO SECTION ==================== -->
+  <section id="hero" class="relative h-screen w-full overflow-hidden bg-black">
+    <video
+      autoplay
+      muted
+      playsinline
+      class="absolute inset-0 h-full w-full object-cover"
+      style="object-position: 70% center;"
+      src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260622_204221_5339e40b-e73d-4ab0-9c65-79c18c66fd50.mp4"
+    ></video>
+    <div class="absolute inset-0 bg-black/55"></div>
+
+    <div class="relative z-10 flex flex-col justify-center px-6 pb-10 pt-24 sm:pb-12 sm:pt-32 md:px-12 md:pb-16 md:pt-40 lg:px-16" style="height: 100vh; margin-top: -40px">
+      <div class="max-w-3xl">
+        <p class="mb-4 sm:mb-6 text-xs sm:text-sm text-white/90 fade-slide-up-1">
+          STEM Educator / Creative Technologist / MOE-Registered Instructor
+        </p>
+        <h1 class="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-medium leading-[1.1] tracking-tight text-white fade-slide-up-2">
+          Teaching code, <br /> robotics, and creative <br /> technology with purpose.
+        </h1>
+      </div>
+
+      <div class="mt-8">
+        <p class="mb-5 sm:mb-6 max-w-sm sm:max-w-2xl text-sm sm:text-base md:text-lg leading-relaxed text-white/80 fade-slide-up-3">
+          Bonjour! This is Evan Chin, an educator who helps students turn ideas into real projects.
+        </p>
+        <div class="flex flex-wrap gap-3 fade-slide-up-4">
+          <a href="#work" class="inline-flex items-center gap-2 rounded-lg bg-white px-5 py-2.5 sm:px-6 sm:py-3 text-sm font-medium text-black transition-all hover:scale-105 hover:bg-white/90">
+            View My Work
+            <i data-lucide="arrow-right" class="h-4 w-4"></i>
+          </a>
+          <a href="https://canva.link/0ehia8hhkkfrjfp" target="_blank" class="inline-flex items-center gap-2 rounded-lg border border-white/30 px-5 py-2.5 sm:px-6 sm:py-3 text-sm font-medium text-white transition-all hover:scale-105 hover:border-white/60">
+            Open Resume
+          </a>
+        </div>
+      </div>
+
+      <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+        <i data-lucide="chevron-down" class="h-6 w-6 text-white/60"></i>
+      </div>
+    </div>
+  </section>
+
+<!-- ==================== MARQUEE SECTION ==================== -->
+  <section class="marquee">
+    <div class="marquee-group">
+      <div class="marquee-card">Python</div>
+      <div class="marquee-card">HTML</div>
+      <div class="marquee-card">CSS</div>
+      <div class="marquee-card">Pybricks</div>
+      <div class="marquee-card">LEGO</div>
+      <div class="marquee-card">Minecraft</div>
+      <div class="marquee-card">Blender</div>
+      <div class="marquee-card">Micro:bit</div>
+      <div class="marquee-card">Arduino</div>
+      <div class="marquee-card">Scratch</div>
+      <div class="marquee-card">C++</div>
+      <div class="marquee-card">Roblox</div>
+      <div class="marquee-card">AI</div>
+      <div class="marquee-card">Capcut</div>
+
+    </div>
+
+    <div aria-hidden class="marquee-group">
+      <div class="marquee-card">Python</div>
+      <div class="marquee-card">HTML</div>
+      <div class="marquee-card">CSS</div>
+      <div class="marquee-card">Pybricks</div>
+      <div class="marquee-card">LEGO</div>
+      <div class="marquee-card">Minecraft</div>
+      <div class="marquee-card">Blender</div>
+      <div class="marquee-card">Micro:bit</div>
+      <div class="marquee-card">Arduino</div>
+      <div class="marquee-card">Scratch</div>
+      <div class="marquee-card">C++</div>
+      <div class="marquee-card">Roblox</div>
+      <div class="marquee-card">AI</div>
+      <div class="marquee-card">Capcut</div>
+
+    </div>
+  </section>
+
+  <!-- ==================== WORK SECTION ==================== -->
+  <section id="work" class="relative px-6 py-20 md:px-12 lg:px-16 lg:py-28">
+    <div class="max-w-6xl mx-auto">
+      <div class="mb-12 scroll-reveal">
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-medium leading-tight">
+          My Projects
+        </h2>
+        <p class="mt-5 max-w-5xl text-sm sm:text-base text-white/80 leading-relaxed">
+          A growing collection of coding, game development, creative technology, robotics, video editing, photography, and poster design projects.
+        </p>
+      </div>
+
+      <!-- Python Projects -->
+      <div class="mb-16 scroll-reveal">
+        <div class="mb-6">
+          <p class="text-xs text-white/60 uppercase tracking-widest mb-2">01</p>
+          <h3 class="text-2xl sm:text-3xl font-medium text-white">Python Projects</h3>
+          <p class="mt-3 max-w-4xl text-sm text-white/55 leading-relaxed">
+            Projects that show programming fundamentals, game logic, visual coding, and creative interaction.
+          </p>
+        </div>
+
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <a href="projects/python-snake-game.html" class="group block">
+            <div class="relative overflow-hidden rounded-2xl bg-white/10 aspect-video mb-4 border border-white/5">
+              <img src="resources/Screenshot 2026-06-30 182957.png" alt="Python Snake Game" class="h-full w-full object-cover transition-all duration-500 group-hover:scale-105" />
+              <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                <span class="rounded-full bg-white/20 backdrop-blur-sm px-6 py-2 text-sm text-white">View Details →</span>
+              </div>
+            </div>
+            <h4 class="text-lg font-medium text-white mb-1">Snake Game</h4>
+            <p class="text-sm text-white/60">A classic Python game with score tracking, food spawning, keyboard controls, and collision detection.</p>
+            <div class="flex flex-wrap gap-2 mt-3">
+              <span class="rounded-full bg-white/10 px-3 py-1 text-xs text-white/70">Python</span>
+              <span class="rounded-full bg-white/10 px-3 py-1 text-xs text-white/70">Tkinter</span>
+              <span class="rounded-full bg-white/10 px-3 py-1 text-xs text-white/70">Game Logic</span>
+            </div>
+          </a>
+
+          <a href="projects/python-greeting-card.html" class="group block">
+            <div class="relative overflow-hidden rounded-2xl bg-white/10 aspect-video mb-4 border border-white/5">
+              <img src="resources/Heart_Shape.png" alt="Python Greeting Card" class="h-full w-full object-cover transition-all duration-500 group-hover:scale-105" />
+              <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                <span class="rounded-full bg-white/20 backdrop-blur-sm px-6 py-2 text-sm text-white">View Details →</span>
+              </div>
+            </div>
+            <h4 class="text-lg font-medium text-white mb-1">Animated Greeting Card</h4>
+            <p class="text-sm text-white/60">A creative project that displays pop-up messages in a heart-shaped pattern with background music.</p>
+            <div class="flex flex-wrap gap-2 mt-3">
+              <span class="rounded-full bg-white/10 px-3 py-1 text-xs text-white/70">Python</span>
+              <span class="rounded-full bg-white/10 px-3 py-1 text-xs text-white/70">Tkinter</span>
+              <span class="rounded-full bg-white/10 px-3 py-1 text-xs text-white/70">Pygame</span>
+            </div>
+          </a>
+
+          <a href="projects/python-tree-drawing.html" class="group block">
+            <div class="relative overflow-hidden rounded-2xl bg-white/10 aspect-video mb-4 border border-white/5">
+              <img src="resources/tree-4.png" alt="Python Turtle Tree Drawing" class="h-full w-full object-cover transition-all duration-500 group-hover:scale-105" />
+              <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                <span class="rounded-full bg-white/20 backdrop-blur-sm px-6 py-2 text-sm text-white">View Details →</span>
+              </div>
+            </div>
+            <h4 class="text-lg font-medium text-white mb-1">Recursive Tree Drawing</h4>
+            <p class="text-sm text-white/60">A visual coding project using Turtle graphics, recursion, randomness, branches, and flower details.</p>
+            <div class="flex flex-wrap gap-2 mt-3">
+              <span class="rounded-full bg-white/10 px-3 py-1 text-xs text-white/70">Python</span>
+              <span class="rounded-full bg-white/10 px-3 py-1 text-xs text-white/70">Turtle</span>
+              <span class="rounded-full bg-white/10 px-3 py-1 text-xs text-white/70">Recursion</span>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Creative Coding -->
+      <div class="mb-16 scroll-reveal">
+        <div class="mb-6">
+          <p class="text-xs text-white/60 uppercase tracking-widest mb-2">02</p>
+          <h3 class="text-2xl sm:text-3xl font-medium text-white">Interactive Web</h3>
+          <p class="mt-3 max-w-2xl text-sm text-white/55 leading-relaxed">
+            Interactive visual projects that combine web technology, creative coding, animation, and user input.
+          </p>
+        </div>
+
+        <!-- ONE GRID with ALL project cards -->
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          
+          <!-- Project 1: Particle System -->
+          <a href="projects/html-particle-system.html" class="group block">
+            <div class="relative overflow-hidden rounded-2xl bg-white/10 aspect-video mb-4 border border-white/5">
+              <img src="resources/Partical-Effect.png" alt="Interactive Particle System" class="h-full w-full object-cover transition-all duration-500 group-hover:scale-105" />
+              <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                <span class="rounded-full bg-white/20 backdrop-blur-sm px-6 py-2 text-sm text-white">View Details →</span>
+              </div>
+            </div>
+            <h4 class="text-lg font-medium text-white mb-1">Interactive Particle System</h4>
+            <p class="text-sm text-white/60">A Saturn-inspired particle simulation using Three.js, MediaPipe hand tracking, and camera-based interaction.</p>
+            <div class="flex flex-wrap gap-2 mt-3">
+              <span class="rounded-full bg-white/10 px-3 py-1 text-xs text-white/70">Three.js</span>
+              <span class="rounded-full bg-white/10 px-3 py-1 text-xs text-white/70">MediaPipe</span>
+              <span class="rounded-full bg-white/10 px-3 py-1 text-xs text-white/70">Interactive Visuals</span>
+            </div>
+          </a>
+
+          <!-- Project 2: Bubble Blaster -->
+          <a href="projects/html-Bubble_Blaster.html" class="group block">
+            <div class="relative overflow-hidden rounded-2xl bg-white/10 aspect-video mb-4 border border-white/5">
+              <img src="resources/Bubble-Blaster.png" alt="Bubble Blaster Rescue" class="h-full w-full object-cover transition-all duration-500 group-hover:scale-105" />
+              <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                <span class="rounded-full bg-white/20 backdrop-blur-sm px-6 py-2 text-sm text-white">View Details →</span>
+              </div>
+            </div>
+            <h4 class="text-lg font-medium text-white mb-1">Bubble Blaster Rescue</h4>
+            <p class="text-sm text-white/60">A vibrant shooting game built with HTML Canvas. Defend the picnic from grumpy blobs by popping them with bubbles!</p>
+            <div class="flex flex-wrap gap-2 mt-3">
+              <span class="rounded-full bg-white/10 px-3 py-1 text-xs text-white/70">HTML Canvas</span>
+              <span class="rounded-full bg-white/10 px-3 py-1 text-xs text-white/70">JavaScript</span>
+              <span class="rounded-full bg-white/10 px-3 py-1 text-xs text-white/70">Game Development</span>
+            </div>
+          </a>
+
+          <!-- Project 3: Add more here if needed -->
+          <a href="#hero" class="group block">
+            <div class="relative overflow-hidden rounded-2xl bg-white/10 aspect-video mb-4 border border-white/5">
+              <img src="resources/Hero-Page.png" alt="Evan's Portfolio Webpage" class="h-full w-full object-cover object-left transition-all duration-500 group-hover:scale-105" />
+              <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                <span class="rounded-full bg-white/20 backdrop-blur-sm px-6 py-2 text-sm text-white">View Details →</span>
+              </div>
+            </div>
+            <h4 class="text-lg font-medium text-white mb-1">Evan's Portfolio Webpage</h4>
+            <p class="text-sm text-white/60">A comprehensive portfolio website featuring project showcases, project galleries, and certifications.</p>
+            <div class="flex flex-wrap gap-2 mt-3">
+              <span class="rounded-full bg-white/10 px-3 py-1 text-xs text-white/70">HTML5</span>
+              <span class="rounded-full bg-white/10 px-3 py-1 text-xs text-white/70">Tailwind CSS</span>
+              <span class="rounded-full bg-white/10 px-3 py-1 text-xs text-white/70">JavaScript</span>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Robotics Competition -->
+      <div class="mb-16 scroll-reveal">
+        <div class="mb-6">
+          <p class="text-xs text-white/60 uppercase tracking-widest mb-2">03</p>
+          <h3 class="text-2xl sm:text-3xl font-medium text-white">Robotics Competition</h3>
+          <p class="mt-3 max-w-4xl text-sm text-white/55 leading-relaxed">
+            Competition Projects, showcasing robot design, Pybricks programming, team scripts, posters, and LEGO builds.
+          </p>
+        </div>
+
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <!-- FLL Competition -->
+          <a href="projects/competition-FLL.html" class="group block">
+            <div class="relative overflow-hidden rounded-2xl bg-white/10 aspect-video mb-4 border border-white/5 flex items-center justify-center p-6">
+              <img 
+                src="resources/FIRSTLego_iconHorz_RGB_reverse.png" 
+                alt="FIRST LEGO League" 
+                class="max-h-[75%] max-w-[90%] object-contain transition-all duration-500 group-hover:scale-105"
+              />
+              <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                <span class="rounded-full bg-white/20 backdrop-blur-sm px-6 py-2 text-sm text-white">View Details →</span>
+              </div>
+            </div>
+            <h4 class="text-lg font-medium text-white mb-1">FIRST LEGO League - Unearthed</h4>
+            <p class="text-sm text-white/60">Complete FLL Explore competition experience.</p>
+            <div class="flex flex-wrap gap-2 mt-3">
+              <span class="rounded-full bg-white/10 px-3 py-1 text-xs text-white/70">LEGO Robotics</span>
+              <span class="rounded-full bg-white/10 px-3 py-1 text-xs text-white/70">Poster</span>
+              <span class="rounded-full bg-white/10 px-3 py-1 text-xs text-white/70">Script</span>
+              <span class="rounded-full bg-white/10 px-3 py-1 text-xs text-white/70">Team Project</span>
+            </div>
+          </a>
+
+          <!-- NRC Competition -->
+          <a href="projects/competition-NRC.html" class="group block">
+            <div class="relative overflow-hidden rounded-2xl bg-white/10 aspect-video mb-4 border border-white/5 flex items-center justify-center p-6">
+              <img 
+                src="resources/NRC-Logo.png" 
+                alt="National Robotics Competition" 
+                class="max-h-[120%] max-w-[120%] object-contain transition-all duration-500 group-hover:scale-105"
+              />
+              <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                <span class="rounded-full bg-white/20 backdrop-blur-sm px-6 py-2 text-sm text-white">View Details →</span>
+              </div>
+            </div>
+            <h4 class="text-lg font-medium text-white mb-1">National Robotics Competition - Mission Meals</h4>
+            <p class="text-sm text-white/60">Complete NRC Regular Category experience.</p>
+            <div class="flex flex-wrap gap-2 mt-3">
+              <span class="rounded-full bg-white/10 px-3 py-1 text-xs text-white/70">LEGO Robotics</span>
+              <span class="rounded-full bg-white/10 px-3 py-1 text-xs text-white/70">Pybricks</span>
+              <span class="rounded-full bg-white/10 px-3 py-1 text-xs text-white/70">Slide</span>
+              <span class="rounded-full bg-white/10 px-3 py-1 text-xs text-white/70">Presentation</span>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Poster Design -->
+      <div class="mb-16 scroll-reveal">
+        <div class="mb-6">
+          <p class="text-xs text-white/60 uppercase tracking-widest mb-2">04</p>
+          <h3 class="text-2xl sm:text-3xl font-medium text-white">Poster Design</h3>
+          <p class="mt-3 max-w-5xl text-sm text-white/55 leading-relaxed">
+            Poster design combining layout, typography, color theory, and creative storytelling.
+          </p>
+        </div>
+
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <!-- Poster 1 - Resume/CV -->
+          <div class="poster-item group block cursor-pointer" data-image="resources/EVAN-CV.png" data-title="Beauty Services Poster">
+            <div class="relative overflow-hidden rounded-2xl bg-white/10 aspect-[3/4] mb-4 border border-white/5 hover:border-white/30 transition-all">
+              <img src="resources/EVAN-CV.png" alt="Beauty Services Poster" class="h-full w-full object-cover transition-all duration-500 group-hover:scale-105" />
+              <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                <span class="rounded-full bg-white/20 backdrop-blur-sm px-6 py-2 text-sm text-white">Click to Enlarge →</span>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Poster 2 - Beauty/Facial -->
+          <div class="poster-item group block cursor-pointer" data-image="resources/feeling.png" data-title="Beauty Services Poster">
+            <div class="relative overflow-hidden rounded-2xl bg-white/10 aspect-[3/4] mb-4 border border-white/5 hover:border-white/30 transition-all">
+              <img src="resources/feeling.png" alt="Beauty Services Poster" class="h-full w-full object-cover transition-all duration-500 group-hover:scale-105" />
+              <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                <span class="rounded-full bg-white/20 backdrop-blur-sm px-6 py-2 text-sm text-white">Click to Enlarge →</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Poster 3 - Badminton -->
+          <div class="poster-item group block cursor-pointer" data-image="resources/Badminton.png" data-title="Sports Poster">
+            <div class="relative overflow-hidden rounded-2xl bg-white/10 aspect-[3/4] mb-4 border border-white/5 hover:border-white/30 transition-all">
+              <img src="resources/Badminton.png" alt="Badminton Poster" class="h-full w-full object-cover transition-all duration-500 group-hover:scale-105" />
+              <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                <span class="rounded-full bg-white/20 backdrop-blur-sm px-6 py-2 text-sm text-white">Click to Enlarge →</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Video Editing & Photography -->
+      <div class="mb-16 scroll-reveal">
+        <div class="mb-6">
+          <p class="text-xs text-white/60 uppercase tracking-widest mb-2">05</p>
+          <h3 class="text-2xl sm:text-3xl font-medium text-white">Video Editing & Photography</h3>
+          <p class="mt-3 max-w-4xl text-sm text-white/55 leading-relaxed">
+            Creative video projects edited with CapCut, plus original photography. All photos and videos on this site are captured and edited by me.
+          </p>
+        </div>
+
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <a href="projects/video-FLL.html" class="group block">
+            <div class="relative overflow-hidden rounded-2xl bg-white/10 aspect-video mb-4 border border-white/5">
+              <img src="resources/IMG_20190522_133853.jpg" alt="Video Editing Showcase" class="h-full w-full object-cover transition-all duration-500 group-hover:scale-105" />
+              <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                <span class="rounded-full bg-white/20 backdrop-blur-sm px-6 py-2 text-sm text-white">View Details →</span>
+              </div>
+            </div>
+            <h4 class="text-lg font-medium text-white mb-1">Video Editing</h4>
+            <p class="text-sm text-white/60">A CapCut-edited showcase video combining clips, transitions, effects, and synchronized audio.</p>
+            <div class="flex flex-wrap gap-2 mt-3">
+              <span class="rounded-full bg-white/10 px-3 py-1 text-xs text-white/70">CapCut</span>
+              <span class="rounded-full bg-white/10 px-3 py-1 text-xs text-white/70">Video Editing</span>
+              <span class="rounded-full bg-white/10 px-3 py-1 text-xs text-white/70">Photography</span>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Creative Projects -->
+      <div class="mb-16 scroll-reveal">
+        <div class="mb-6">
+          <p class="text-xs text-white/60 uppercase tracking-widest mb-2">06</p>
+          <h3 class="text-2xl sm:text-3xl font-medium text-white">Creative Projects</h3>
+          <p class="mt-3 max-w-4xl text-sm text-white/55 leading-relaxed">
+            A collection of interactive projects exploring game design, programming, 3D modeling, and music!
+          </p>
+        </div>
+
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <!-- Blender Project -->
+          <a href="projects/blender-models.html" class="group block">
+            <div class="relative overflow-hidden rounded-2xl bg-white/10 aspect-video mb-4 border border-white/5">
+              <img src="resources/Blender.png" alt="Evan's Blender File" class="h-full w-full object-cover transition-all duration-500 group-hover:scale-105" />
+              <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                <span class="rounded-full bg-white/20 backdrop-blur-sm px-6 py-2 text-sm text-white">View Details →</span>
+              </div>
+            </div>
+            <h4 class="text-lg font-medium text-white mb-1">Blender - 3D Model Collection</h4>
+            <p class="text-sm text-white/60">A collection of 3D models created in Blender including characters, props, and environments.</p>
+            <div class="flex flex-wrap gap-2 mt-3">
+              <span class="rounded-full bg-white/10 px-3 py-1 text-xs text-white/70">Blender</span>
+              <span class="rounded-full bg-white/10 px-3 py-1 text-xs text-white/70">3D Modeling</span>
+              <span class="rounded-full bg-white/10 px-3 py-1 text-xs text-white/70">Low Poly</span>
+              <span class="rounded-full bg-white/10 px-3 py-1 text-xs text-white/70">Design</span>
+            </div>
+          </a>
+
+          <!-- Minecraft Music Rhythm -->
+          <a href="projects/minecraft-music.html" class="group block">
+            <div class="relative overflow-hidden rounded-2xl bg-white/10 aspect-video mb-4 border border-white/5">
+              <img src="resources/Minecraft-Butter.png" alt="Minecraft Music Rhythm" class="h-full w-full object-cover transition-all duration-500 group-hover:scale-105" />
+              <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                <span class="rounded-full bg-white/20 backdrop-blur-sm px-6 py-2 text-sm text-white">View Details →</span>
+              </div>
+            </div>
+            <h4 class="text-lg font-medium text-white mb-1">Minecraft - Music Rhythm</h4>
+            <p class="text-sm text-white/60">Redstone-powered note block music sequencer built in Minecraft.</p>
+            <div class="flex flex-wrap gap-2 mt-3">
+              <span class="rounded-full bg-white/10 px-3 py-1 text-xs text-white/70">Minecraft</span>
+              <span class="rounded-full bg-white/10 px-3 py-1 text-xs text-white/70">Note Blocks</span>
+              <span class="rounded-full bg-white/10 px-3 py-1 text-xs text-white/70">Redstone</span>
+              <span class="rounded-full bg-white/10 px-3 py-1 text-xs text-white/70">Music</span>
+            </div>
+          </a>
+
+          <!-- Scratch Flappy Bird -->
+          <a href="projects/scratch-flappybird.html" class="group block">
+            <div class="relative overflow-hidden rounded-2xl bg-white/10 aspect-video mb-4 border border-white/5">
+              <img src="resources/Scratch-FlappyBird.png" alt="Scratch Flappy Bird" class="h-full w-full object-cover transition-all duration-500 group-hover:scale-105" />
+              <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                <span class="rounded-full bg-white/20 backdrop-blur-sm px-6 py-2 text-sm text-white">View Details →</span>
+              </div>
+            </div>
+            <h4 class="text-lg font-medium text-white mb-1">Scratch - Flappy Bird</h4>
+            <p class="text-sm text-white/60">A Flappy Bird-inspired game built in Scratch, featuring custom graphics, animations, and game mechanics.</p>
+            <div class="flex flex-wrap gap-2 mt-3">
+              <span class="rounded-full bg-white/10 px-3 py-1 text-xs text-white/70">Scratch</span>
+              <span class="rounded-full bg-white/10 px-3 py-1 text-xs text-white/70">Game Design</span>
+              <span class="rounded-full bg-white/10 px-3 py-1 text-xs text-white/70">Block Coding</span>
+              <span class="rounded-full bg-white/10 px-3 py-1 text-xs text-white/70">Animation</span>
+            </div>
+          </a>
+
+          <!-- Microbit Morse Code -->
+          <a href="projects/microbit-morse.html" class="group block">
+            <div class="relative overflow-hidden rounded-2xl bg-white/10 aspect-video mb-4 border border-white/5">
+              <img src="resources/Morse-Code.jpg" alt="Microbit Morse Code" class="h-full w-full object-top object-cover transition-all duration-500 group-hover:scale-105" />
+              <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                <span class="rounded-full bg-white/20 backdrop-blur-sm px-6 py-2 text-sm text-white">View Details →</span>
+              </div>
+            </div>
+            <h4 class="text-lg font-medium text-white mb-1">Microbit - Morse Code</h4>
+            <p class="text-sm text-white/60">A Microbit project that encodes text into Morse code and transmits it wirelessly between devices.</p>
+            <div class="flex flex-wrap gap-2 mt-3">
+              <span class="rounded-full bg-white/10 px-3 py-1 text-xs text-white/70">Microbit</span>
+              <span class="rounded-full bg-white/10 px-3 py-1 text-xs text-white/70">MakeCode</span>
+              <span class="rounded-full bg-white/10 px-3 py-1 text-xs text-white/70">Morse Code</span>
+              <span class="rounded-full bg-white/10 px-3 py-1 text-xs text-white/70">Radio</span>
+            </div>
+          </a>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== ABOUT SECTION ==================== -->
+  <section id="about" class="relative px-6 py-20 md:px-12 lg:px-16 lg:py-28 bg-white/[0.03]">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid gap-12 md:grid-cols-2 md:gap-16 items-center">
+        <div class="scroll-reveal">
+          <div class="relative overflow-hidden rounded-3xl aspect-[50/50] bg-white/10 border border-white/5">
+            <img src="resources/Avatar.png" alt="Evan Chin profile photo" class="h-full w-full object-cover" />
+          </div>
+        </div>
+
+        <div class="scroll-reveal">
+          <p class="text-xs sm:text-sm text-white/60 uppercase tracking-widest mb-4">About Me</p>
+          <h2 class="text-3xl sm:text-4xl md:text-5xl font-medium leading-tight mb-6">
+            Learning in Progress
+          </h2>
+          <div class="space-y-4 text-white/70 leading-relaxed text-sm sm:text-base">
+            <p>
+              Even though I only hold an SPM certificate, but a piece of paper does not defines who I am.
+            </p>
+            <p>
+              Curiosity, discipline, and the willingness to keep learning have shaped my journey far more than any qualification.
+            </p>
+            <p>
+              Every project in this portfolio represents countless hours of learning, building, failing, and improving. This isn't just a showcase of what I've done, it's proof of who I'm becoming.
+            </p>
+          </div>
+          <div class="flex flex-wrap gap-4 mt-8">
+            <div>
+              <p class="text-3xl font-medium text-white">1,000+</p>
+              <p class="text-xs text-white/60 mt-1">Students Taught</p>
+            </div>
+            <div class="w-px bg-white/40"></div>
+            <div>
+              <p class="text-3xl font-medium text-white">3+</p>
+              <p class="text-xs text-white/60 mt-1">Years Teaching</p>
+            </div>
+            <div class="w-px bg-white/40"></div>
+            <div>
+              <p class="text-3xl font-medium text-white">4</p>
+              <p class="text-xs text-white/60 mt-1">Languages</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CERTIFICATES SECTION ==================== -->
+  <section id="certificates" class="relative px-6 py-20 md:px-12 lg:px-16 lg:py-28">
+    <div class="max-w-6xl mx-auto">
+      <div class="mb-12 scroll-reveal">
+        <p class="text-xs sm:text-sm text-white/60 uppercase tracking-widest mb-4">CERTIFICATE GALLERY</p>
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-medium leading-tight">
+          Certifications & Training
+        </h2>
+      </div>
+
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+
+        <div class="rounded-2xl bg-white/10 p-4 scroll-reveal border border-white/5 hover:bg-white/15 transition-colors group cursor-pointer" onclick="openModal('resources/SPM.jpg')">
+          <div class="relative overflow-hidden rounded-xl aspect-[4/3] bg-white/5">
+            <img 
+              src="resources/SPM.jpg" 
+              alt="SPM results" 
+              class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+            />
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+              <span class="rounded-full bg-white/20 backdrop-blur-sm px-4 py-2 text-xs text-white">Click to enlarge</span>
+            </div>
+          </div>
+          <div class="mt-3">
+            <h3 class="text-sm font-medium text-white">Sijil Pelajaran Malaysia (SPM)</h3>
+            <p class="text-xs text-white/40">KPM • Dec 2018</p>
+          </div>
+        </div>
+
+        <!-- Certificate 1 -->
+        <div class="rounded-2xl bg-white/10 p-4 scroll-reveal border border-white/5 hover:bg-white/15 transition-colors group cursor-pointer" onclick="openModal('resources/certificate-1.png')">
+          <div class="relative overflow-hidden rounded-xl aspect-[4/3] bg-white/5">
+            <img 
+              src="resources/certificate-1.png" 
+              alt="Coming Soon" 
+              class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+            />
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+              <span class="rounded-full bg-white/20 backdrop-blur-sm px-4 py-2 text-xs text-white">Click to enlarge</span>
+            </div>
+          </div>
+          <div class="mt-3">
+            <h3 class="text-sm font-medium text-white">International Facilitator Training 2026</h3>
+            <p class="text-xs text-white/40">Code.org • June 2026</p>
+          </div>
+        </div>
+
+        <!-- Certificate 2 -->
+        <div class="rounded-2xl bg-white/10 p-4 scroll-reveal border border-white/5 hover:bg-white/15 transition-colors group cursor-pointer" onclick="openModal('resources/Minecraft-Cert.jpg')">
+          <div class="relative overflow-hidden rounded-xl aspect-[4/3] bg-white/5">
+            <img 
+              src="resources/Minecraft-Cert.jpg" 
+              alt="Minecraft 101: Craft a Learning Classroom" 
+              class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+            />
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+              <span class="rounded-full bg-white/20 backdrop-blur-sm px-4 py-2 text-xs text-white">Click to enlarge</span>
+            </div>
+          </div>
+          <div class="mt-3">
+            <h3 class="text-sm font-medium text-white">Minecraft 101: Craft a Learning Classroom</h3>
+            <p class="text-xs text-white/40">Microsoft • July 2025</p>
+          </div>
+        </div>
+
+        <!-- Certificate 3 -->
+        <div class="rounded-2xl bg-white/10 p-4 scroll-reveal border border-white/5 hover:bg-white/15 transition-colors group cursor-pointer" onclick="openModal('resources/Abacus-ab.jpg')">
+          <div class="relative overflow-hidden rounded-xl aspect-[4/3] bg-white/5">
+            <img 
+              src="resources/Abacus-ab.jpg" 
+              alt="Abacus and Mental Arithmetic Grading Exam" 
+              class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+            />
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+              <span class="rounded-full bg-white/20 backdrop-blur-sm px-4 py-2 text-xs text-white">Click to enlarge</span>
+            </div>
+          </div>
+          <div class="mt-3">
+            <h3 class="text-sm font-medium text-white">Abacus Calculation Grading Exam</h3>
+            <p class="text-xs text-white/40">CMA Institute • October 2023</p>
+          </div>
+        </div>
+
+        <!-- Certificate 4 -->
+        <div class="rounded-2xl bg-white/10 p-4 scroll-reveal border border-white/5 hover:bg-white/15 transition-colors group cursor-pointer" onclick="openModal('resources/Abacus-Mental.jpg')">
+          <div class="relative overflow-hidden rounded-xl aspect-[4/3] bg-white/5">
+            <img 
+              src="resources/Abacus-Mental.jpg" 
+              alt="Abacus and Mental Arithmetic Grading Exam" 
+              class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+            />
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+              <span class="rounded-full bg-white/20 backdrop-blur-sm px-4 py-2 text-xs text-white">Click to enlarge</span>
+            </div>
+          </div>
+          <div class="mt-3">
+            <h3 class="text-sm font-medium text-white">Mental Arithmetic Grading Exam</h3>
+            <p class="text-xs text-white/40">CMA Institute • October 2023</p>
+          </div>
+        </div>
+
+        <!-- Certificate 5 -->
+        <div class="rounded-2xl bg-white/10 p-4 scroll-reveal border border-white/5 hover:bg-white/15 transition-colors group cursor-pointer" onclick="openModal('resources/abacus-Teaching.jpg')">
+          <div class="relative overflow-hidden rounded-xl aspect-[4/3] bg-white/5">
+            <img 
+              src="resources/Abacus-Teaching.jpg" 
+              alt="Abacus and Mental Arithmetic Grading Exam" 
+              class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+            />
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+              <span class="rounded-full bg-white/20 backdrop-blur-sm px-4 py-2 text-xs text-white">Click to enlarge</span>
+            </div>
+          </div>
+          <div class="mt-3">
+            <h3 class="text-sm font-medium text-white">Instructors of Abacus Calculation</h3>
+            <p class="text-xs text-white/40">CMA Institute • October 2023</p>
+          </div>
+        </div>
+
+        <!-- Certificate 6 -->
+        <div class="rounded-2xl bg-white/10 p-4 scroll-reveal border border-white/5 hover:bg-white/15 transition-colors group cursor-pointer" onclick="openModal('resources/Microbit.jpg')">
+          <div class="relative overflow-hidden rounded-xl aspect-[4/3] bg-white/5">
+            <img 
+              src="resources/Microbit.jpg" 
+              alt="Microbit Certificate" 
+              class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+            />
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+              <span class="rounded-full bg-white/20 backdrop-blur-sm px-4 py-2 text-xs text-white">Click to enlarge</span>
+            </div>
+          </div>
+          <div class="mt-3">
+            <h3 class="text-sm font-medium text-white">Abacus and Mental Arithmetic Grading Exam</h3>
+            <p class="text-xs text-white/40">Microbit Educational Foundation • July 2026</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== MODAL / LIGHTBOX ==================== -->
+  <div id="certModal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/90 backdrop-blur-lg p-4" onclick="closeModal()">
+    <div class="relative max-w-4xl w-full max-h-[90vh] flex items-center justify-center" onclick="event.stopPropagation()">
+      <img 
+        id="modalImage" 
+        src="" 
+        alt="Certificate" 
+        class="max-w-full max-h-[90vh] object-contain rounded-xl shadow-2xl border border-white/10"
+      />
+      <button 
+        onclick="closeModal()" 
+        class="absolute top-4 right-4 text-white/60 hover:text-white transition-colors p-2 rounded-full bg-black/40 hover:bg-black/60"
+      >
+        <i data-lucide="x" class="h-8 w-8"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- ==================== CURRICULUM DESIGN SECTION ==================== -->
+  <section id="curriculum" class="relative px-6 py-20 md:px-12 lg:px-16 lg:py-28 bg-white/[0.02]">
+    <div class="max-w-6xl mx-auto">
+      <div class="mb-12 scroll-reveal">
+        <p class="text-xs sm:text-sm text-white/50 uppercase tracking-widest mb-4">Curriculum Design</p>
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-medium leading-tight">
+          Teaching Materials & Curriculum
+        </h2>
+        <p class="mt-4 text-sm text-white/50 max-w-5xl">
+          A collection of curriculum materials designed for various programs including Minecraft, AI Explorer, Pybricks, ScratchJr, FLL, and Abacus.
+        </p>
+      </div>
+
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <!-- Minecraft Curriculum -->
+        <div class="rounded-2xl bg-white/10 p-4 scroll-reveal border border-white/5 hover:bg-white/15 transition-colors">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="h-10 w-10 rounded-xl bg-white/10 flex items-center justify-center flex-shrink-0">
+              <i data-lucide="blocks" class="h-5 w-5 text-white/70"></i>
+            </div>
+            <h3 class="text-sm font-medium text-white">Minecraft Curriculum</h3>
+          </div>
+          <div class="relative w-full" style="padding-bottom: 75%; height: 0; overflow: hidden; background: #1a1a1a; border-radius: 8px;">
+            <iframe 
+              src="https://drive.google.com/file/d/1E2W6qgCNYb71OR1Es1ewBlOwbCbYnMIn/preview" 
+              class="absolute -top-1 -left-4 w-[calc(100%+32px)] h-[calc(100%)]"
+              frameborder="0"
+              allowfullscreen
+              style="background: #fff;"
+            ></iframe>
+          </div>
+        </div>
+
+        <!-- AI Explorer Curriculum -->
+        <div class="rounded-2xl bg-white/10 p-4 scroll-reveal border border-white/5 hover:bg-white/15 transition-colors">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="h-10 w-10 rounded-xl bg-white/10 flex items-center justify-center flex-shrink-0">
+              <i data-lucide="bot" class="h-5 w-5 text-white/70"></i>
+            </div>
+            <h3 class="text-sm font-medium text-white">AI Explorer Curriculum</h3>
+          </div>
+          <div class="relative w-full" style="padding-bottom: 75%; height: 0; overflow: hidden; background: #1a1a1a; border-radius: 8px;">
+            <iframe 
+              src="https://drive.google.com/file/d/1eN_yy-dj00DhogJr4lgItDnwTHUGF_dw/preview" 
+              class="absolute -top-1 -left-4 w-[calc(100%+32px)] h-[calc(100%)]"
+              frameborder="0"
+              allowfullscreen
+              style="background: #fff;"
+            ></iframe>
+          </div>
+        </div>
+        
+        <!-- Pybricks Curriculum -->
+        <div class="rounded-2xl bg-white/10 p-4 scroll-reveal border border-white/5 hover:bg-white/15 transition-colors">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="h-10 w-10 rounded-xl bg-white/10 flex items-center justify-center flex-shrink-0">
+              <i data-lucide="cpu" class="h-5 w-5 text-white/70"></i>
+            </div>
+            <h3 class="text-sm font-medium text-white">Pybricks Teaching Material</h3>
+          </div>
+          <div class="relative w-full" style="padding-bottom: 75%; height: 0; overflow: hidden; background: #1a1a1a; border-radius: 8px;">
+             <iframe 
+              src="https://drive.google.com/file/d/17vyuo3RWUh4ctTle4gf5OzqXoqroUXH-/preview" 
+              class="absolute -top-1 -left-4 w-[calc(100%+32px)] h-[calc(100%)]"
+              frameborder="0"
+              allowfullscreen
+              style="background: #fff;"
+            ></iframe>
+          </div>
+        </div>
+
+        <!-- ScratchJr Curriculum -->
+        <div class="rounded-2xl bg-white/10 p-4 scroll-reveal border border-white/5 hover:bg-white/15 transition-colors">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="h-10 w-10 rounded-xl bg-white/10 flex items-center justify-center flex-shrink-0">
+              <i data-lucide="gamepad-2" class="h-5 w-5 text-white/70"></i>
+            </div>
+            <h3 class="text-sm font-medium text-white">ScratchJr Curriculum</h3>
+          </div>
+          <div class="relative w-full" style="padding-bottom: 75%; height: 0; overflow: hidden; background: #1a1a1a; border-radius: 8px;">
+            <iframe 
+              src="https://drive.google.com/file/d/1baBFrkd7lirub0L2HwCoT45rDToh-4fB/preview" 
+              class="absolute -top-1 -left-4 w-[calc(100%+32px)] h-[calc(100%)]"
+              frameborder="0"
+              allowfullscreen
+              style="background: #fff;"
+            ></iframe>
+          </div>
+        </div>
+
+        <!-- FLL Curriculum -->
+        <div class="rounded-2xl bg-white/10 p-4 scroll-reveal border border-white/5 hover:bg-white/15 transition-colors">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="h-10 w-10 rounded-xl bg-white/10 flex items-center justify-center flex-shrink-0">
+              <i data-lucide="trophy" class="h-5 w-5 text-white/70"></i>
+            </div>
+            <h3 class="text-sm font-medium text-white">FLL Teaching Material</h3>
+          </div>
+          <div class="relative w-full" style="padding-bottom: 75%; height: 0; overflow: hidden; background: #1a1a1a; border-radius: 8px;">
+            <iframe 
+              src="https://drive.google.com/file/d/13cmfiX7tVstRJ_KKMEn-bsS_aSCyFl9H/preview" 
+              class="absolute -top-1 -left-4 w-[calc(100%+32px)] h-[calc(100%)]"
+              frameborder="0"
+              allowfullscreen
+              style="background: #fff;"
+            ></iframe>
+          </div>
+        </div>
+
+        <!-- Abacus Teaching Material -->
+        <div class="rounded-2xl bg-white/10 p-4 scroll-reveal border border-white/5 hover:bg-white/15 transition-colors">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="h-10 w-10 rounded-xl bg-white/10 flex items-center justify-center flex-shrink-0">
+              <i data-lucide="calculator" class="h-5 w-5 text-white/70"></i>
+            </div>
+            <h3 class="text-sm font-medium text-white">Abacus Teaching Material</h3>
+          </div>
+          <div class="relative w-full" style="padding-bottom: 75%; height: 0; overflow: hidden; background: #1a1a1a; border-radius: 8px;">
+            <iframe 
+              src="https://drive.google.com/file/d/19uioXee_o42hmaZ1CMtelgz3OnGo7eC6/preview" 
+              class="absolute -top-1 -left-4 w-[calc(100%+32px)] h-[calc(100%)]"
+              frameborder="0"
+              allowfullscreen
+              style="background: #fff;"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- ==================== CONTACT SECTION ==================== -->
+  <section id="contact" class="relative px-6 py-20 md:px-12 lg:px-16 lg:py-28">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-12 scroll-reveal">
+        <p class="text-xs sm:text-sm text-white/60 uppercase tracking-widest mb-4">Get In Touch</p>
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-medium leading-tight mb-4">
+          Seeking opportunities in education, technology, and creative development.
+        </h2>
+        <p class="text-white/70 text-sm sm:text-base max-w-lg mx-auto">
+          Thank you for visiting my portfolio. I look forward to hearing from you.
+        </p>
+      </div>
+
+      <div class="flex flex-col sm:flex-row justify-center items-center gap-4 mt-8 scroll-reveal">
+        <a href="#" data-copy-email class="inline-flex items-center gap-2 h-12 px-4 rounded-full bg-white/10 hover:bg-white/15 transition-all group border border-white/5">
+          <i data-lucide="mail" class="h-5 w-5 text-white/70 group-hover:text-white transition-colors"></i>
+          <span class="text-sm text-white/70 group-hover:text-white transition-colors">evanchin75@gmail.com</span>
+          <i data-lucide="copy" class="h-4 w-4 text-white/30 group-hover:text-white/60 transition-all opacity-0 group-hover:opacity-100"></i>
+        </a>
+        <a href="https://wa.me/6581109861" class="inline-flex items-center gap-2 rounded-full bg-white/10 px-5 py-3 text-sm text-white/70 hover:bg-white/15 hover:text-white transition-colors border border-white/5">
+          <i data-lucide="phone" class="h-5 w-5"></i>
+          +65 8110 9861
+        </a>
+      </div>
+    </div>
+  </section>
+
+    <!-- ==================== LIGHTBOX MODAL ==================== -->
+  <div id="lightbox" class="fixed inset-0 z-[100] bg-black/95 backdrop-blur-xl hidden items-center justify-center p-4 md:p-8" style="display: none;">
+    <div class="relative w-full h-full flex items-center justify-center">
+      <!-- Close Button -->
+      <button id="lightboxClose" class="absolute top-4 right-4 z-10 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 transition-colors flex items-center justify-center border border-white/10">
+        <i data-lucide="x" class="h-6 w-6 text-white"></i>
+      </button>
+
+      <!-- Image Container with Zoom -->
+      <div class="relative w-full h-full max-w-6xl max-h-[90vh] overflow-hidden flex items-center justify-center">
+        <img id="lightboxImage" src="" alt="Poster" class="max-w-full max-h-full object-contain transition-transform duration-200 cursor-zoom-in" />
+      </div>
+
+      <!-- Title -->
+      <p id="lightboxTitle" class="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/60 text-sm bg-black/50 px-4 py-2 rounded-full backdrop-blur-sm"></p>
+
+      <!-- Zoom Controls -->
+      <div class="absolute bottom-20 left-1/2 -translate-x-1/2 flex gap-3">
+        <button id="zoomIn" class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 transition-colors flex items-center justify-center border border-white/10">
+          <i data-lucide="zoom-in" class="h-5 w-5 text-white"></i>
+        </button>
+        <button id="zoomOut" class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 transition-colors flex items-center justify-center border border-white/10">
+          <i data-lucide="zoom-out" class="h-5 w-5 text-white"></i>
+        </button>
+        <button id="zoomReset" class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 transition-colors flex items-center justify-center border border-white/10">
+          <i data-lucide="rotate-ccw" class="h-5 w-5 text-white"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="border-t border-white/5 px-6 py-8 md:px-12 lg:px-16">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="text-xs text-white/50">© 2026 Evan Chin. Portfolio website.</p>
+      <div class="flex gap-6">
+        <a href="#hero" class="text-xs text-white/50 hover:text-white/70 transition-colors">Home</a>
+        <a href="#work" class="text-xs text-white/50 hover:text-white/70 transition-colors">Projects</a>
+        <a href="#about" class="text-xs text-white/50 hover:text-white/70 transition-colors">About Me</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

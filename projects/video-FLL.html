@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Video Editing Showcase - Evan Chin Portfolio</title>
+  
+  <!-- Google Fonts: Geist -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            geist: ['Geist', 'sans-serif'],
+          },
+        },
+      },
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+  <!-- Your custom CSS -->
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body class="font-geist bg-black text-white">
+
+  <!-- ==================== NAVBAR ==================== -->
+  <nav id="navbar" class="fixed top-0 inset-x-0 z-50 transition-all duration-300 bg-black/80 backdrop-blur-xl">
+    <div class="flex items-center justify-between px-6 py-5 md:px-12 lg:px-16">
+      <a href="../index.html#work" class="flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors">
+        <i data-lucide="arrow-left" class="h-4 w-4"></i>
+        Back to Projects
+      </a>
+      <a href="../index.html#contact" class="rounded-lg bg-white px-5 py-2 text-sm font-medium text-black transition-all hover:scale-105 hover:bg-white/90">
+        Contact Me
+      </a>
+    </div>
+  </nav>
+
+  <!-- ==================== HERO SECTION ==================== -->
+  <section class="relative pt-24 pb-6 px-6 md:px-12 lg:px-16">
+    <div class="max-w-4xl mx-auto">
+      <div class="mb-4">
+        <h1 class="text-3xl sm:text-5xl md:text-6xl font-medium leading-tight text-white mb-4">
+          Video Editing Showcase
+        </h1>
+        <p class="max-w-3xl text-sm sm:text-base text-white/60 leading-relaxed">
+          A collection of video edits created with CapCut, demonstrating storytelling, transitions, effects, and audio synchronization.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== VIDEO SECTION ==================== -->
+  <section class="px-6 py-6 md:px-12 lg:px-16 bg-white/[0.03]">
+    <div class="max-w-4xl mx-auto">
+      <div class="relative rounded-2xl overflow-hidden bg-black/40 aspect-video max-w-3xl mx-auto border border-white/5">
+        <iframe 
+          class="absolute inset-0 h-full w-full"
+          src="https://player.mux.com/eeP2YzeE5jiKczyip5ACBr6tdEf82HCTGzBxmNyIs9g"
+          title="Video Editing Showcase"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
+  </section>
+  <section class="px-6 py-6 md:px-12 lg:px-16 bg-white/[0.03]">
+    <div class="max-w-4xl mx-auto">
+      <div class="relative rounded-2xl overflow-hidden bg-black/40 aspect-video max-w-3xl mx-auto border border-white/5">
+        <iframe 
+          class="absolute inset-0 h-full w-full"
+          src="https://player.mux.com/AbK51kurEHPe1R7kmpbUECrq2NHqCk6TU8euGNSeACo"
+          title="Video Editing Showcase"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="px-6 py-6 md:px-12 lg:px-16 bg-white/[0.03]">
+    <div class="max-w-4xl mx-auto">
+      <div class="relative rounded-2xl overflow-hidden bg-black/40 aspect-video max-w-3xl mx-auto border border-white/5">
+        <iframe 
+          class="absolute inset-0 h-full w-full"
+          src="https://player.mux.com/00ztTFu01bQ005dyNRdn00ZcPQILwzkYML8XfqIxOB2htT00"
+          title="Video Editing Showcase"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PROJECT INFO GRID ==================== -->
+  <section class="px-6 py-6 md:px-12 lg:px-16">
+    <div class="max-w-4xl mx-auto">
+      <div class="grid gap-6 sm:grid-cols-3">
+        <div class="rounded-2xl bg-white/10 p-6 border border-white/5 hover:bg-white/15 transition-colors">
+          <h4 class="text-xs text-white/40 uppercase tracking-widest mb-2">Tools Used</h4>
+          <p class="text-sm text-white/80">CapCut, Adobe Premiere Pro, MUX</p>
+        </div>
+        <div class="rounded-2xl bg-white/10 p-6 border border-white/5 hover:bg-white/15 transition-colors">
+          <h4 class="text-xs text-white/40 uppercase tracking-widest mb-2">Main Skills</h4>
+          <p class="text-sm text-white/80">Storytelling, transitions, effects, audio sync, color grading</p>
+        </div>
+        <div class="rounded-2xl bg-white/10 p-6 border border-white/5 hover:bg-white/15 transition-colors">
+          <h4 class="text-xs text-white/40 uppercase tracking-widest mb-2">Project Type</h4>
+          <p class="text-sm text-white/80">Creative video editing / content creation</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="border-t border-white/5 px-6 py-8 md:px-12 lg:px-16">
+    <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="text-xs text-white/40">© 2026 Evan Chin. Portfolio website.</p>
+      <div class="flex gap-6">
+        <a href="../index.html#work" class="text-xs text-white/40 hover:text-white/70 transition-colors">Projects</a>
+        <a href="../index.html#contact" class="text-xs text-white/40 hover:text-white/70 transition-colors">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    lucide.createIcons();
+  </script>
+  <script src="../script.js"></script>
+</body>
+</html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Snake Game - Evan Chin Portfolio</title>
+  
+  <!-- Google Fonts: Geist -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            geist: ['Geist', 'sans-serif'],
+          },
+        },
+      },
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+  <!-- Your custom CSS -->
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body class="font-geist bg-black text-white">
+
+  <!-- ==================== NAVBAR ==================== -->
+  <nav id="navbar" class="fixed top-0 inset-x-0 z-50 transition-all duration-300 bg-black/80 backdrop-blur-xl">
+    <div class="flex items-center justify-between px-6 py-5 md:px-12 lg:px-16">
+      <a href="../index.html#work" class="flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors">
+        <i data-lucide="arrow-left" class="h-4 w-4"></i>
+        Back to Projects
+      </a>
+      <a href="../index.html#contact" class="rounded-lg bg-white px-5 py-2 text-sm font-medium text-black transition-all hover:scale-105 hover:bg-white/90">
+        Contact Me
+      </a>
+    </div>
+  </nav>
+
+  <!-- ==================== HERO SECTION ==================== -->
+  <section class="relative pt-24 pb-6 px-6 md:px-12 lg:px-16">
+    <div class="max-w-4xl mx-auto">
+      <div class="mb-4">
+        <h1 class="text-3xl sm:text-5xl md:text-6xl font-medium leading-tight text-white mb-4">
+          Snake Game
+        </h1>
+        <p class="max-w-3xl text-sm sm:text-base text-white/60 leading-relaxed">
+          A classic Python game built with Tkinter. Control the snake, eat food, and grow while avoiding collisions.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== VIDEO SECTION ==================== -->
+  <section class="px-6 py-6 md:px-12 lg:px-16 bg-white/[0.03]">
+    <div class="max-w-4xl mx-auto">
+      <!-- YouTube Embed -->
+      <div class="relative rounded-2xl overflow-hidden bg-black/40 aspect-video max-w-3xl mx-auto border border-white/5">
+        <iframe 
+          class="absolute inset-0 h-full w-full"
+          src="https://www.youtube.com/embed/atm0mdmySP4?si=W90zd9cKzdULq9qU"
+          title="Snake Game Demo"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PROJECT INFO GRID ==================== -->
+  <section class="px-6 py-6 md:px-12 lg:px-16">
+    <div class="max-w-4xl mx-auto">
+      <div class="grid gap-6 sm:grid-cols-3">
+        <div class="rounded-2xl bg-white/10 p-6 border border-white/5 hover:bg-white/15 transition-colors">
+          <h4 class="text-xs text-white/40 uppercase tracking-widest mb-2">Tools Used</h4>
+          <p class="text-sm text-white/80">Python, Tkinter, Random Module</p>
+        </div>
+        <div class="rounded-2xl bg-white/10 p-6 border border-white/5 hover:bg-white/15 transition-colors">
+          <h4 class="text-xs text-white/40 uppercase tracking-widest mb-2">Main Skills</h4>
+          <p class="text-sm text-white/80">Game loop, keyboard input, collision detection, scoring system</p>
+        </div>
+        <div class="rounded-2xl bg-white/10 p-6 border border-white/5 hover:bg-white/15 transition-colors">
+          <h4 class="text-xs text-white/40 uppercase tracking-widest mb-2">Project Type</h4>
+          <p class="text-sm text-white/80">Beginner-friendly Python game project</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== DETAILS SECTION ==================== -->
+  <section class="px-6 py-6 md:px-12 lg:px-16 bg-white/[0.03]">
+    <div class="max-w-4xl mx-auto">
+      <div class="grid gap-6 md:grid-cols-2">
+        <div class="rounded-2xl bg-white/10 p-6 border border-white/5 hover:bg-white/15 transition-colors">
+          <h3 class="text-lg font-medium text-white mb-3">What the project does</h3>
+          <p class="text-sm text-white/70 leading-relaxed">
+            The player controls a snake using the arrow keys. The snake grows when it eats food, the score increases, and the game ends when the snake hits the wall or itself.
+          </p>
+        </div>
+        <div class="rounded-2xl bg-white/10 p-6 border border-white/5 hover:bg-white/15 transition-colors">
+          <h3 class="text-lg font-medium text-white mb-3">What it demonstrates</h3>
+          <ul class="text-sm text-white/70 leading-relaxed space-y-1.5 list-disc list-inside">
+            <li>Creating a basic game loop using Tkinter timing</li>
+            <li>Handling keyboard input and direction changes</li>
+            <li>Detecting collisions with walls and the snake body</li>
+            <li>Structuring a beginner-friendly game project for teaching</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CODE PREVIEW ==================== -->
+  <section class="px-6 py-6 md:px-12 lg:px-16">
+    <div class="max-w-4xl mx-auto">
+      <div class="mb-4">
+        <h2 class="text-2xl sm:text-3xl font-medium text-white mb-2">Code Preview</h2>
+      </div>
+      
+      <div class="rounded-2xl bg-white/10 p-6 overflow-x-auto border border-white/5">
+        <pre class="text-xs text-white/70 font-mono leading-relaxed"><code>from tkinter import *
+import random
+
+# Constants
+GAME_WIDTH = 700
+GAME_HEIGHT = 700
+SPEED = 100  # Higher is slower
+SPACE_SIZE = 50
+BODY_PARTS = 3
+SNAKE_COLOR = "#00FF00"
+FOOD_COLOR = "#FF0000"
+BACKGROUND_COLOR = "#000000"
+
+class Snake:
+    def __init__(self):
+        self.body_size = BODY_PARTS
+        self.coordinates = []
+        self.squares = []
+
+        for i in range(0, BODY_PARTS):
+            self.coordinates.append([0, 0])
+
+        for x, y in self.coordinates:
+            square = canvas.create_rectangle(
+                x, y, x + SPACE_SIZE, y + SPACE_SIZE,
+                fill=SNAKE_COLOR, tag="snake"
+            )
+            self.squares.append(square)
+
+class Food:
+    def __init__(self):
+        x = random.randint(0, (GAME_WIDTH // SPACE_SIZE) - 1) * SPACE_SIZE
+        y = random.randint(0, (GAME_HEIGHT // SPACE_SIZE) - 1) * SPACE_SIZE
+        self.coordinates = [x, y]
+        canvas.create_oval(
+            x, y, x + SPACE_SIZE, y + SPACE_SIZE,
+            fill=FOOD_COLOR, tag="food"
+        )
+
+def next_turn(snake, food):
+    x, y = snake.coordinates[0]
+
+    if direction == "up":
+        y -= SPACE_SIZE
+    elif direction == "down":
+        y += SPACE_SIZE
+    elif direction == "left":
+        x -= SPACE_SIZE
+    elif direction == "right":
+        x += SPACE_SIZE
+
+    snake.coordinates.insert(0, (x, y))
+    square = canvas.create_rectangle(
+        x, y, x + SPACE_SIZE, y + SPACE_SIZE,
+        fill=SNAKE_COLOR
+    )
+    snake.squares.insert(0, square)
+
+    if x == food.coordinates[0] and y == food.coordinates[1]:
+        global score
+        score += 1
+        label.config(text="Score: {}".format(score))
+        canvas.delete("food")
+        food = Food()
+    else:
+        del snake.coordinates[-1]
+        canvas.delete(snake.squares[-1])
+        del snake.squares[-1]
+
+    if check_collisions(snake):
+        game_over()
+    else:
+        window.after(SPEED, next_turn, snake, food)</code></pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="border-t border-white/5 px-6 py-8 md:px-12 lg:px-16">
+    <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="text-xs text-white/40">© 2026 Evan Chin. Portfolio website.</p>
+      <div class="flex gap-6">
+        <a href="../index.html#work" class="text-xs text-white/40 hover:text-white/70 transition-colors">Projects</a>
+        <a href="../index.html#contact" class="text-xs text-white/40 hover:text-white/70 transition-colors">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    lucide.createIcons();
+  </script>
+  <script src="../script.js"></script>
+</body>
+</html>

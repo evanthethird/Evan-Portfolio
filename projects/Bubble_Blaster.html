@@ -1,0 +1,869 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Bubble Blaster Rescue</title>
+<style>
+    :root {
+        --panel: rgba(255, 255, 255, 0.82);
+        --ink: #263238;
+        --accent: #ff7ab6;
+        --accent-2: #6ee7f2;
+        --danger: #ff5a6f;
+        --good: #41d681;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+        color: var(--ink);
+        font-family: "Trebuchet MS", Verdana, system-ui, sans-serif;
+        background: #9fe9ff;
+        user-select: none;
+    }
+
+    canvas {
+        display: block;
+        width: 100vw;
+        height: 100vh;
+        cursor: crosshair;
+        touch-action: none;
+    }
+
+    .hud {
+        position: fixed;
+        top: 16px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 2;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        width: min(760px, calc(100vw - 24px));
+        pointer-events: none;
+    }
+
+    .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        min-width: 92px;
+        justify-content: center;
+        padding: 9px 13px;
+        border: 2px solid rgba(255, 255, 255, 0.9);
+        border-radius: 999px;
+        background: var(--panel);
+        box-shadow: 0 8px 24px rgba(46, 74, 93, 0.16);
+        font-weight: 800;
+        backdrop-filter: blur(8px);
+    }
+
+    .hp-wrap {
+        width: 105px;
+        height: 12px;
+        overflow: hidden;
+        border-radius: 999px;
+        background: rgba(38, 50, 56, 0.18);
+        box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.18);
+    }
+
+    #hpBar {
+        width: 100%;
+        height: 100%;
+        border-radius: inherit;
+        background: linear-gradient(90deg, var(--good), #ffe566, var(--danger));
+        transition: width 120ms ease;
+    }
+
+    .help {
+        position: fixed;
+        left: 16px;
+        bottom: 16px;
+        z-index: 2;
+        max-width: min(390px, calc(100vw - 32px));
+        padding: 12px 14px;
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.72);
+        box-shadow: 0 8px 24px rgba(46, 74, 93, 0.14);
+        font-size: 14px;
+        line-height: 1.35;
+        backdrop-filter: blur(8px);
+        pointer-events: none;
+    }
+
+    .overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 10;
+        display: none;
+        place-items: center;
+        padding: 24px;
+        background:
+            radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.45), transparent 22%),
+            radial-gradient(circle at 80% 10%, rgba(255, 122, 182, 0.28), transparent 25%),
+            rgba(30, 45, 66, 0.52);
+        backdrop-filter: blur(6px);
+    }
+
+    .overlay.show { display: grid; }
+
+    .card {
+        width: min(520px, 94vw);
+        padding: 28px;
+        text-align: center;
+        border: 4px solid rgba(255, 255, 255, 0.9);
+        border-radius: 34px;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(255, 252, 239, 0.94));
+        box-shadow: 0 24px 80px rgba(0, 0, 0, 0.28);
+        animation: pop 260ms cubic-bezier(.2, 1.7, .4, 1) both;
+    }
+
+    @keyframes pop {
+        from { transform: scale(0.86) translateY(24px); opacity: 0; }
+        to { transform: scale(1) translateY(0); opacity: 1; }
+    }
+
+    .card h1 {
+        margin: 0 0 8px;
+        font-size: clamp(34px, 7vw, 58px);
+        line-height: 0.95;
+    }
+
+    .card p {
+        margin: 10px 0;
+        font-size: 17px;
+    }
+
+    #finalStats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        margin: 20px 0;
+    }
+
+    #finalStats span {
+        padding: 12px 8px;
+        border-radius: 18px;
+        background: #fff1a8;
+        font-size: 14px;
+        font-weight: 800;
+    }
+
+    #finalStats strong {
+        display: block;
+        margin-top: 4px;
+        font-size: 24px;
+    }
+
+    button {
+        border: 0;
+        border-radius: 999px;
+        padding: 14px 24px;
+        background: linear-gradient(135deg, var(--accent), #ffb36e);
+        color: white;
+        font: 900 18px/1 "Trebuchet MS", Verdana, sans-serif;
+        box-shadow: 0 9px 0 #ca5689, 0 18px 24px rgba(255, 122, 182, 0.25);
+        cursor: pointer;
+        transform: translateY(0);
+    }
+
+    button:hover { filter: brightness(1.05); }
+    button:active { transform: translateY(5px); box-shadow: 0 4px 0 #ca5689; }
+
+    .tiny {
+        margin-top: 14px;
+        font-size: 13px;
+        opacity: 0.72;
+    }
+</style>
+</head>
+<body>
+<canvas id="game" aria-label="Bubble Blaster Rescue game canvas"></canvas>
+
+<div class="hud" aria-live="polite">
+    <div class="pill">❤️ <div class="hp-wrap"><div id="hpBar"></div></div> <span id="hpText">100</span></div>
+    <div class="pill">🌟 Score <span id="scoreText">0</span></div>
+    <div class="pill">🎈 Pops <span id="killsText">0</span></div>
+    <div class="pill">🌊 Wave <span id="waveText">1</span></div>
+</div>
+
+<div class="help">Move with <strong>WASD</strong> or <strong>arrow keys</strong>. Aim with the mouse. Hold click/tap to spray bubbles. Collect hearts and stars!</div>
+
+<div id="overlay" class="overlay show">
+    <div class="card">
+        <h1 id="overlayTitle">Bubble Blaster Rescue</h1>
+        <p id="overlayText">Grumpy blobs are stealing the picnic sparkles. Pop them with bubbles and stay cheerful!</p>
+        <div id="finalStats" aria-live="polite"></div>
+        <button id="okBtn" type="button">OK - Start Game</button>
+        <div class="tiny">Tip: keep moving in circles and use the edges to dodge.</div>
+    </div>
+</div>
+
+<script>
+(() => {
+    "use strict";
+
+    const canvas = document.getElementById("game");
+    const ctx = canvas.getContext("2d");
+    const overlay = document.getElementById("overlay");
+    const overlayTitle = document.getElementById("overlayTitle");
+    const overlayText = document.getElementById("overlayText");
+    const finalStats = document.getElementById("finalStats");
+    const okBtn = document.getElementById("okBtn");
+    const hpBar = document.getElementById("hpBar");
+    const hpText = document.getElementById("hpText");
+    const scoreText = document.getElementById("scoreText");
+    const killsText = document.getElementById("killsText");
+    const waveText = document.getElementById("waveText");
+
+    const world = { w: window.innerWidth, h: window.innerHeight, dpr: 1 };
+    const keys = Object.create(null);
+    const mouse = { x: world.w / 2, y: world.h / 2, down: false };
+
+    const bullets = [];
+    const enemies = [];
+    const particles = [];
+    const pickups = [];
+    const decorations = [];
+
+    const player = {
+        x: world.w / 2,
+        y: world.h / 2,
+        r: 21,
+        hp: 100,
+        maxHp: 100,
+        speed: 255,
+        fireCooldown: 0,
+        invincible: 0,
+        blink: 0
+    };
+
+    const rand = (min, max) => min + Math.random() * (max - min);
+    const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+    const loadBestScore = () => {
+        try { return Number(localStorage.getItem("bubbleBlasterBest") || 0); }
+        catch { return 0; }
+    };
+    const saveBestScore = score => {
+        try { localStorage.setItem("bubbleBlasterBest", String(score)); }
+        catch { /* Game still works when storage is unavailable. */ }
+    };
+
+    const game = {
+        mode: "ready",
+        running: false,
+        lastTime: 0,
+        elapsed: 0,
+        score: 0,
+        kills: 0,
+        wave: 1,
+        combo: 0,
+        comboTimer: 0,
+        spawnTimer: 0,
+        shake: 0,
+        best: loadBestScore()
+    };
+
+    function resize() {
+        world.w = window.innerWidth;
+        world.h = window.innerHeight;
+        world.dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+        canvas.width = Math.floor(world.w * world.dpr);
+        canvas.height = Math.floor(world.h * world.dpr);
+        canvas.style.width = world.w + "px";
+        canvas.style.height = world.h + "px";
+        ctx.setTransform(world.dpr, 0, 0, world.dpr, 0, 0);
+        player.x = clamp(player.x, player.r, world.w - player.r);
+        player.y = clamp(player.y, player.r, world.h - player.r);
+        makeDecorations();
+        draw();
+    }
+
+    function makeDecorations() {
+        decorations.length = 0;
+        const count = Math.ceil((world.w * world.h) / 26000);
+        for (let i = 0; i < count; i++) {
+            decorations.push({
+                x: rand(20, world.w - 20),
+                y: rand(70, world.h - 20),
+                r: rand(3, 8),
+                petals: Math.floor(rand(4, 7)),
+                spin: rand(0, Math.PI * 2)
+            });
+        }
+    }
+
+    function setOverlay(title, text, buttonText, statsHtml = "") {
+        overlayTitle.textContent = title;
+        overlayText.textContent = text;
+        finalStats.innerHTML = statsHtml;
+        okBtn.textContent = buttonText;
+        overlay.classList.add("show");
+    }
+
+    function hideOverlay() {
+        overlay.classList.remove("show");
+    }
+
+    function resetGame() {
+        bullets.length = 0;
+        enemies.length = 0;
+        particles.length = 0;
+        pickups.length = 0;
+
+        player.x = world.w / 2;
+        player.y = world.h / 2;
+        player.hp = player.maxHp;
+        player.fireCooldown = 0;
+        player.invincible = 0;
+        player.blink = 0;
+
+        game.mode = "playing";
+        game.elapsed = 0;
+        game.score = 0;
+        game.kills = 0;
+        game.wave = 1;
+        game.combo = 0;
+        game.comboTimer = 0;
+        game.spawnTimer = 0.4;
+        game.shake = 0;
+        game.lastTime = performance.now();
+
+        hideOverlay();
+        for (let i = 0; i < 6; i++) spawnEnemy(true);
+        updateHud();
+
+        if (!game.running) {
+            game.running = true;
+            requestAnimationFrame(loop);
+        }
+    }
+
+    function endGame() {
+        if (game.mode === "over") return;
+        game.mode = "over";
+        game.running = false;
+        game.best = Math.max(game.best, game.score);
+        saveBestScore(game.best);
+
+        setOverlay(
+            "Picnic Saved? Almost!",
+            "The blobs got too close, but your bubble skills are getting stronger.",
+            "OK - Play Again",
+            `
+                <span>Score<strong>${game.score}</strong></span>
+                <span>Pops<strong>${game.kills}</strong></span>
+                <span>Best<strong>${game.best}</strong></span>
+            `
+        );
+    }
+
+    function spawnEnemy(startingWave = false) {
+        const side = Math.floor(rand(0, 4));
+        let x, y;
+        if (side === 0) { x = rand(0, world.w); y = -35; }
+        if (side === 1) { x = world.w + 35; y = rand(0, world.h); }
+        if (side === 2) { x = rand(0, world.w); y = world.h + 35; }
+        if (side === 3) { x = -35; y = rand(0, world.h); }
+
+        const fast = Math.random() < Math.min(0.28, 0.08 + game.wave * 0.018);
+        const chunky = Math.random() < Math.min(0.25, 0.06 + game.wave * 0.015);
+        const r = chunky ? rand(24, 31) : fast ? rand(13, 16) : rand(17, 22);
+
+        enemies.push({
+            x,
+            y,
+            r,
+            wobble: rand(0, Math.PI * 2),
+            hp: chunky ? 56 + game.wave * 4 : fast ? 22 + game.wave * 2 : 36 + game.wave * 3,
+            maxHp: chunky ? 56 + game.wave * 4 : fast ? 22 + game.wave * 2 : 36 + game.wave * 3,
+            speed: (fast ? rand(145, 185) : chunky ? rand(62, 82) : rand(88, 118)) + game.wave * 2,
+            damage: chunky ? 18 : 11,
+            face: startingWave ? "curious" : Math.random() < 0.5 ? "grumpy" : "silly"
+        });
+    }
+
+    function spawnPickup(x, y) {
+        const kind = Math.random() < 0.55 ? "heart" : "star";
+        pickups.push({
+            kind,
+            x,
+            y,
+            r: kind === "heart" ? 13 : 12,
+            life: 8,
+            spin: rand(0, Math.PI * 2)
+        });
+    }
+
+    function popParticles(x, y, amount, size, happy = true) {
+        for (let i = 0; i < amount; i++) {
+            const angle = rand(0, Math.PI * 2);
+            const speed = rand(50, 260);
+            particles.push({
+                x,
+                y,
+                dx: Math.cos(angle) * speed,
+                dy: Math.sin(angle) * speed,
+                r: rand(2, size),
+                life: rand(0.35, 0.9),
+                maxLife: 0,
+                happy
+            });
+            particles[particles.length - 1].maxLife = particles[particles.length - 1].life;
+        }
+    }
+
+    function shoot() {
+        if (player.fireCooldown > 0 || game.mode !== "playing") return;
+        const angle = Math.atan2(mouse.y - player.y, mouse.x - player.x);
+        bullets.push({
+            x: player.x + Math.cos(angle) * (player.r + 3),
+            y: player.y + Math.sin(angle) * (player.r + 3),
+            dx: Math.cos(angle) * 520,
+            dy: Math.sin(angle) * 520,
+            r: 7,
+            life: 1.2,
+            wobble: rand(0, Math.PI * 2)
+        });
+        popParticles(player.x, player.y, 3, 4, true);
+        player.fireCooldown = 0.105;
+    }
+
+    function update(dt) {
+        if (game.mode !== "playing") return;
+
+        game.elapsed += dt;
+        game.wave = 1 + Math.floor(game.elapsed / 18) + Math.floor(game.kills / 18);
+        game.spawnTimer -= dt;
+        game.comboTimer -= dt;
+        game.shake = Math.max(0, game.shake - 26 * dt);
+        player.fireCooldown = Math.max(0, player.fireCooldown - dt);
+        player.invincible = Math.max(0, player.invincible - dt);
+        player.blink += dt * 18;
+
+        if (game.comboTimer <= 0) game.combo = 0;
+
+        const spawnDelay = Math.max(0.28, 1.08 - game.wave * 0.055);
+        if (game.spawnTimer <= 0) {
+            spawnEnemy();
+            if (game.wave > 3 && Math.random() < 0.28) spawnEnemy();
+            game.spawnTimer = spawnDelay;
+        }
+
+        let vx = 0;
+        let vy = 0;
+        if (keys.w || keys.arrowup) vy -= 1;
+        if (keys.s || keys.arrowdown) vy += 1;
+        if (keys.a || keys.arrowleft) vx -= 1;
+        if (keys.d || keys.arrowright) vx += 1;
+        if (vx || vy) {
+            const len = Math.hypot(vx, vy);
+            player.x += (vx / len) * player.speed * dt;
+            player.y += (vy / len) * player.speed * dt;
+        }
+        player.x = clamp(player.x, player.r, world.w - player.r);
+        player.y = clamp(player.y, player.r + 52, world.h - player.r);
+
+        if (mouse.down) shoot();
+
+        for (let i = bullets.length - 1; i >= 0; i--) {
+            const b = bullets[i];
+            b.life -= dt;
+            b.wobble += dt * 10;
+            b.x += b.dx * dt;
+            b.y += b.dy * dt + Math.sin(b.wobble) * 0.35;
+            if (b.life <= 0 || b.x < -40 || b.x > world.w + 40 || b.y < -40 || b.y > world.h + 40) {
+                bullets.splice(i, 1);
+            }
+        }
+
+        for (let i = particles.length - 1; i >= 0; i--) {
+            const p = particles[i];
+            p.life -= dt;
+            p.x += p.dx * dt;
+            p.y += p.dy * dt;
+            p.dy += 120 * dt;
+            p.dx *= 0.985;
+            if (p.life <= 0) particles.splice(i, 1);
+        }
+
+        for (let i = pickups.length - 1; i >= 0; i--) {
+            const p = pickups[i];
+            p.life -= dt;
+            p.spin += dt * 4;
+            p.y += Math.sin(p.spin) * 0.35;
+            const dist = Math.hypot(player.x - p.x, player.y - p.y);
+            if (dist < player.r + p.r) {
+                if (p.kind === "heart") {
+                    player.hp = clamp(player.hp + 18, 0, player.maxHp);
+                    game.score += 50;
+                } else {
+                    game.score += 240;
+                    game.combo += 2;
+                    game.comboTimer = 2;
+                }
+                popParticles(p.x, p.y, 14, 6, true);
+                pickups.splice(i, 1);
+            } else if (p.life <= 0) {
+                pickups.splice(i, 1);
+            }
+        }
+
+        for (let ei = enemies.length - 1; ei >= 0; ei--) {
+            const e = enemies[ei];
+            e.wobble += dt * 4;
+            const angle = Math.atan2(player.y - e.y, player.x - e.x);
+            e.x += Math.cos(angle) * e.speed * dt + Math.cos(e.wobble) * 24 * dt;
+            e.y += Math.sin(angle) * e.speed * dt + Math.sin(e.wobble * 0.7) * 18 * dt;
+
+            if (Math.hypot(player.x - e.x, player.y - e.y) < player.r + e.r && player.invincible <= 0) {
+                player.hp -= e.damage;
+                player.invincible = 0.7;
+                game.combo = 0;
+                game.shake = 10;
+                popParticles(player.x, player.y, 18, 7, false);
+                if (player.hp <= 0) {
+                    player.hp = 0;
+                    updateHud();
+                    endGame();
+                    return;
+                }
+            }
+
+            for (let bi = bullets.length - 1; bi >= 0; bi--) {
+                const b = bullets[bi];
+                if (Math.hypot(b.x - e.x, b.y - e.y) < b.r + e.r) {
+                    e.hp -= 18;
+                    bullets.splice(bi, 1);
+                    popParticles(b.x, b.y, 8, 5, true);
+
+                    if (e.hp <= 0) {
+                        const comboBonus = game.combo * 15;
+                        game.combo += 1;
+                        game.comboTimer = 1.8;
+                        game.kills += 1;
+                        game.score += 100 + comboBonus + game.wave * 10;
+                        game.shake = Math.max(game.shake, 5);
+                        popParticles(e.x, e.y, 28, 8, true);
+                        if (Math.random() < 0.18) spawnPickup(e.x, e.y);
+                        enemies.splice(ei, 1);
+                    }
+                    break;
+                }
+            }
+        }
+
+        updateHud();
+    }
+
+    function updateHud() {
+        const hp = Math.max(0, Math.round(player.hp));
+        hpText.textContent = hp;
+        hpBar.style.width = (hp / player.maxHp * 100) + "%";
+        scoreText.textContent = String(game.score);
+        killsText.textContent = String(game.kills);
+        waveText.textContent = String(game.wave);
+    }
+
+    function drawBackground() {
+        const sky = ctx.createLinearGradient(0, 0, 0, world.h);
+        sky.addColorStop(0, "#91ecff");
+        sky.addColorStop(0.55, "#b8f7c3");
+        sky.addColorStop(1, "#7bd97a");
+        ctx.fillStyle = sky;
+        ctx.fillRect(0, 0, world.w, world.h);
+
+        ctx.globalAlpha = 0.14;
+        ctx.strokeStyle = "#ffffff";
+        ctx.lineWidth = 2;
+        const spacing = 58;
+        for (let x = -spacing; x < world.w + spacing; x += spacing) {
+            ctx.beginPath();
+            ctx.moveTo(x, 0);
+            ctx.lineTo(x + world.h * 0.3, world.h);
+            ctx.stroke();
+        }
+        ctx.globalAlpha = 1;
+
+        decorations.forEach(f => {
+            ctx.save();
+            ctx.translate(f.x, f.y);
+            ctx.rotate(f.spin);
+            ctx.fillStyle = "rgba(255,255,255,0.72)";
+            for (let i = 0; i < f.petals; i++) {
+                ctx.rotate((Math.PI * 2) / f.petals);
+                ctx.beginPath();
+                ctx.ellipse(f.r, 0, f.r, f.r * 0.55, 0, 0, Math.PI * 2);
+                ctx.fill();
+            }
+            ctx.fillStyle = "#ffd84d";
+            ctx.beginPath();
+            ctx.arc(0, 0, f.r * 0.55, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.restore();
+        });
+    }
+
+    function drawPlayer() {
+        const angle = Math.atan2(mouse.y - player.y, mouse.x - player.x);
+        const hiddenForBlink = player.invincible > 0 && Math.floor(player.blink) % 2 === 0;
+        if (hiddenForBlink) return;
+
+        ctx.save();
+        ctx.translate(player.x, player.y);
+        ctx.rotate(angle);
+
+        ctx.fillStyle = "rgba(255,255,255,0.28)";
+        ctx.beginPath();
+        ctx.arc(0, 4, player.r + 6, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = "#35b7ff";
+        ctx.beginPath();
+        ctx.arc(0, 0, player.r, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = "#ffffff";
+        ctx.beginPath();
+        ctx.arc(5, -7, 5, 0, Math.PI * 2);
+        ctx.arc(5, 7, 5, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = "#263238";
+        ctx.beginPath();
+        ctx.arc(7, -7, 2, 0, Math.PI * 2);
+        ctx.arc(7, 7, 2, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.strokeStyle = "#263238";
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.arc(8, 0, 8, -0.75, 0.75);
+        ctx.stroke();
+
+        ctx.fillStyle = "#ffec8b";
+        ctx.beginPath();
+        ctx.arc(player.r + 7, 0, 8, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+    }
+
+    function drawEnemy(e) {
+        const healthRatio = Math.max(0, e.hp / e.maxHp);
+        ctx.save();
+        ctx.translate(e.x, e.y);
+        ctx.rotate(Math.sin(e.wobble) * 0.08);
+
+        ctx.fillStyle = "rgba(64, 44, 80, 0.18)";
+        ctx.beginPath();
+        ctx.ellipse(0, e.r * 0.85, e.r * 0.95, e.r * 0.35, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = e.face === "silly" ? "#b769ff" : e.face === "curious" ? "#ff8f70" : "#ff5a6f";
+        ctx.beginPath();
+        ctx.arc(0, 0, e.r, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = "rgba(255,255,255,0.28)";
+        ctx.beginPath();
+        ctx.arc(-e.r * 0.35, -e.r * 0.35, e.r * 0.35, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = "white";
+        ctx.beginPath();
+        ctx.arc(-e.r * 0.32, -e.r * 0.14, e.r * 0.18, 0, Math.PI * 2);
+        ctx.arc(e.r * 0.32, -e.r * 0.14, e.r * 0.18, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = "#263238";
+        ctx.beginPath();
+        ctx.arc(-e.r * 0.28, -e.r * 0.12, e.r * 0.07, 0, Math.PI * 2);
+        ctx.arc(e.r * 0.28, -e.r * 0.12, e.r * 0.07, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.strokeStyle = "#263238";
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        if (e.face === "silly") {
+            ctx.arc(0, e.r * 0.16, e.r * 0.3, 0.1, Math.PI - 0.1);
+        } else {
+            ctx.arc(0, e.r * 0.42, e.r * 0.32, Math.PI + 0.1, Math.PI * 2 - 0.1);
+        }
+        ctx.stroke();
+
+        ctx.fillStyle = "rgba(38, 50, 56, 0.28)";
+        roundRect(-e.r, -e.r - 13, e.r * 2, 7, 999);
+        ctx.fill();
+        ctx.fillStyle = "#fff176";
+        roundRect(-e.r, -e.r - 13, e.r * 2 * healthRatio, 7, 999);
+        ctx.fill();
+
+        ctx.restore();
+    }
+
+    function drawBullet(b) {
+        ctx.save();
+        ctx.globalAlpha = 0.85;
+        ctx.fillStyle = "#ffffff";
+        ctx.beginPath();
+        ctx.arc(b.x, b.y, b.r + 2, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = "#67e8f9";
+        ctx.beginPath();
+        ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = "rgba(255,255,255,0.65)";
+        ctx.beginPath();
+        ctx.arc(b.x - 2, b.y - 2, b.r * 0.34, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+    }
+
+    function drawPickup(p) {
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.spin);
+        ctx.globalAlpha = clamp(p.life, 0.25, 1);
+        if (p.kind === "heart") {
+            ctx.fillStyle = "#ff4d7d";
+            ctx.beginPath();
+            ctx.moveTo(0, 10);
+            ctx.bezierCurveTo(-18, -3, -9, -18, 0, -8);
+            ctx.bezierCurveTo(9, -18, 18, -3, 0, 10);
+            ctx.fill();
+        } else {
+            ctx.fillStyle = "#ffe45e";
+            starPath(0, 0, 15, 7, 5);
+            ctx.fill();
+        }
+        ctx.restore();
+    }
+
+    function drawParticles() {
+        particles.forEach(p => {
+            const alpha = clamp(p.life / p.maxLife, 0, 1);
+            ctx.globalAlpha = alpha;
+            ctx.fillStyle = p.happy ? "#fff176" : "#ff5a6f";
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r * alpha, 0, Math.PI * 2);
+            ctx.fill();
+        });
+        ctx.globalAlpha = 1;
+    }
+
+    function drawCombo() {
+        if (game.combo < 3 || game.mode !== "playing") return;
+        ctx.save();
+        ctx.textAlign = "center";
+        ctx.font = "900 26px Trebuchet MS, Verdana, sans-serif";
+        ctx.lineWidth = 6;
+        ctx.strokeStyle = "rgba(255,255,255,0.88)";
+        ctx.strokeText("Combo x" + game.combo + "!", world.w / 2, 86);
+        ctx.fillStyle = "#ff5fb3";
+        ctx.fillText("Combo x" + game.combo + "!", world.w / 2, 86);
+        ctx.restore();
+    }
+
+    function draw() {
+        ctx.save();
+        ctx.clearRect(0, 0, world.w, world.h);
+        const shakeX = game.shake ? rand(-game.shake, game.shake) : 0;
+        const shakeY = game.shake ? rand(-game.shake, game.shake) : 0;
+        ctx.translate(shakeX, shakeY);
+
+        drawBackground();
+        pickups.forEach(drawPickup);
+        bullets.forEach(drawBullet);
+        enemies.forEach(drawEnemy);
+        drawParticles();
+        drawPlayer();
+        ctx.restore();
+
+        drawCombo();
+    }
+
+    function roundRect(x, y, width, height, radius) {
+        const r = Math.min(radius, Math.abs(width) / 2, Math.abs(height) / 2);
+        ctx.beginPath();
+        ctx.moveTo(x + r, y);
+        ctx.arcTo(x + width, y, x + width, y + height, r);
+        ctx.arcTo(x + width, y + height, x, y + height, r);
+        ctx.arcTo(x, y + height, x, y, r);
+        ctx.arcTo(x, y, x + width, y, r);
+        ctx.closePath();
+    }
+
+    function starPath(x, y, outer, inner, points) {
+        ctx.beginPath();
+        for (let i = 0; i < points * 2; i++) {
+            const radius = i % 2 === 0 ? outer : inner;
+            const angle = -Math.PI / 2 + i * Math.PI / points;
+            const px = x + Math.cos(angle) * radius;
+            const py = y + Math.sin(angle) * radius;
+            if (i === 0) ctx.moveTo(px, py);
+            else ctx.lineTo(px, py);
+        }
+        ctx.closePath();
+    }
+
+    function loop(now) {
+        if (!game.running) return;
+        const dt = Math.min(0.033, (now - game.lastTime) / 1000 || 0);
+        game.lastTime = now;
+        update(dt);
+        draw();
+        if (game.running) requestAnimationFrame(loop);
+    }
+
+    function setPointer(event) {
+        const rect = canvas.getBoundingClientRect();
+        mouse.x = clamp(event.clientX - rect.left, 0, world.w);
+        mouse.y = clamp(event.clientY - rect.top, 0, world.h);
+    }
+
+    window.addEventListener("resize", resize);
+
+    document.addEventListener("keydown", event => {
+        keys[event.key.toLowerCase()] = true;
+        keys[event.code.toLowerCase()] = true;
+        if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Space"].includes(event.code)) {
+            event.preventDefault();
+        }
+        if ((event.key === "Enter" || event.key === " ") && game.mode !== "playing") {
+            resetGame();
+        }
+    });
+
+    document.addEventListener("keyup", event => {
+        keys[event.key.toLowerCase()] = false;
+        keys[event.code.toLowerCase()] = false;
+    });
+
+    canvas.addEventListener("pointermove", setPointer);
+    canvas.addEventListener("pointerdown", event => {
+        setPointer(event);
+        if (game.mode !== "playing") {
+            resetGame();
+            return;
+        }
+        mouse.down = true;
+        shoot();
+    });
+    window.addEventListener("pointerup", () => { mouse.down = false; });
+    window.addEventListener("blur", () => { mouse.down = false; });
+
+    okBtn.addEventListener("click", resetGame);
+
+    resize();
+    updateHud();
+    setOverlay("Bubble Blaster Rescue", "Grumpy blobs are stealing the picnic sparkles. Pop them with bubbles and stay cheerful!", "OK - Start Game");
+})();
+</script>
+</body>
+</html>

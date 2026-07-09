@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scratch Flappy Bird - Evan Chin Portfolio</title>
+  
+  <!-- Google Fonts: Geist -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            geist: ['Geist', 'sans-serif'],
+          },
+        },
+      },
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+  <!-- Your custom CSS -->
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body class="font-geist bg-black text-white">
+
+  <!-- ==================== NAVBAR ==================== -->
+  <nav id="navbar" class="fixed top-0 inset-x-0 z-50 transition-all duration-300 bg-black/80 backdrop-blur-xl">
+    <div class="flex items-center justify-between px-6 py-5 md:px-12 lg:px-16">
+      <a href="../index.html#work" class="flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors">
+        <i data-lucide="arrow-left" class="h-4 w-4"></i>
+        Back to Projects
+      </a>
+      <a href="../index.html#contact" class="rounded-lg bg-white px-5 py-2 text-sm font-medium text-black transition-all hover:scale-105 hover:bg-white/90">
+        Contact Me
+      </a>
+    </div>
+  </nav>
+
+  <!-- ==================== HERO SECTION ==================== -->
+  <section class="relative pt-24 pb-6 px-6 md:px-12 lg:px-16">
+    <div class="max-w-5xl mx-auto">
+      <div class="mb-4">
+        <p class="text-xs sm:text-sm text-white/50 uppercase tracking-widest mb-3">Scratch</p>
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-medium leading-tight text-white mb-4">
+          Flappy Bird
+        </h1>
+        <p class="max-w-5xl text-sm sm:text-base text-white/60 leading-relaxed">
+          A Flappy Bird-style game developed in Scratch using block-based programming, custom artwork, smooth animations, and interactive gameplay mechanics.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PROJECT INFO GRID ==================== -->
+  <section class="px-6 py-6 md:px-12 lg:px-16">
+    <div class="max-w-4xl mx-auto">
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="rounded-2xl bg-white/10 p-6 border border-white/5 hover:bg-white/15 transition-colors">
+          <h4 class="text-xs text-white/40 uppercase tracking-widest mb-2">Tools Used</h4>
+          <p class="text-sm text-white/80">Scratch, Block Coding</p>
+        </div>
+        <div class="rounded-2xl bg-white/10 p-6 border border-white/5 hover:bg-white/15 transition-colors">
+          <h4 class="text-xs text-white/40 uppercase tracking-widest mb-2">Main Skills</h4>
+          <p class="text-sm text-white/80">Game Logic, Event Handling, Collision Detection, Score Tracking, Custom Sprite Design</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SCRATCH EMBED SECTION ==================== -->
+  <section class="px-6 py-6 md:px-12 lg:px-16 bg-white/[0.03]">
+    <div class="max-w-5xl mx-auto">
+      <div class="mb-4">
+        <p class="text-xs sm:text-sm text-white/50 uppercase tracking-widest mb-2">Play</p>
+        <h2 class="text-2xl sm:text-3xl font-medium text-white mb-2">Flappy Bird Game</h2>
+        <p class="text-sm text-white/60">
+          Click the game to play. Press space or click to flap and avoid the pipes!
+        </p>
+      </div>
+
+      <!-- Scratch Embed Centered -->
+      <div class="flex justify-center">
+        <div class="rounded-2xl overflow-hidden bg-white/5 border border-white/5 p-2">
+          <iframe 
+            src="https://scratch.mit.edu/projects/1351849376/embed" 
+            allowtransparency="true" 
+            width="485" 
+            height="402" 
+            frameborder="0" 
+            scrolling="no" 
+            allowfullscreen
+            class="rounded-xl"
+          ></iframe>
+        </div>
+      </div>
+      
+      <div class="mt-3 text-center">
+        <a href="https://scratch.mit.edu/projects/1351849376/" 
+           target="_blank" 
+           class="text-sm text-white/60 hover:text-white transition-colors inline-flex items-center gap-2">
+          <i data-lucide="external-link" class="h-4 w-4"></i>
+          Open in Scratch
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="border-t border-white/5 px-6 py-8 md:px-12 lg:px-16">
+    <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="text-xs text-white/40">© 2026 Evan Chin. Portfolio website.</p>
+      <div class="flex gap-6">
+        <a href="../index.html#work" class="text-xs text-white/40 hover:text-white/70 transition-colors">Projects</a>
+        <a href="../index.html#contact" class="text-xs text-white/40 hover:text-white/70 transition-colors">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    lucide.createIcons();
+  </script>
+  <script src="../script.js"></script>
+</body>
+</html>
